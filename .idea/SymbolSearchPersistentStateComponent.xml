@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SymbolSearchPersistentStateComponent">
+    <option name="entries">
+      <map>
+        <entry key="$PROJECT_DIR$/mcp-chatbot/backend/app/auth/jwt.py">
+          <value>
+            <FileEntry>
+              <option name="meta">
+                <FileMeta>
+                  <option name="timeStamp" value="1772782845296" />
+                  <option name="hash" value="2036068690" />
+                </FileMeta>
+              </option>
+              <option name="records">
+                <list>
+                  <SymbolRecordBean>
+                    <option name="name" value="verify_password" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/mcp-chatbot/backend/app/auth/jwt.py" />
+                    <option name="startLine" value="24" />
+                    <option name="endLine" value="25" />
+                    <option name="endCharacter" value="62" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="authenticate_user" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/mcp-chatbot/backend/app/auth/jwt.py" />
+                    <option name="startLine" value="28" />
+                    <option name="endLine" value="31" />
+                    <option name="endCharacter" value="56" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="create_access_token" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/mcp-chatbot/backend/app/auth/jwt.py" />
+                    <option name="startLine" value="34" />
+                    <option name="endLine" value="38" />
+                    <option name="endCharacter" value="69" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="get_current_user" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/mcp-chatbot/backend/app/auth/jwt.py" />
+                    <option name="startLine" value="41" />
+                    <option name="endLine" value="51" />
+                    <option name="endCharacter" value="68" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                </list>
+              </option>
+            </FileEntry>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mcp-chatbot/backend/app/db.py">
+          <value>
+            <FileEntry>
+              <option name="meta">
+                <FileMeta>
+                  <option name="timeStamp" value="1772782845298" />
+                  <option name="hash" value="-89812962" />
+                </FileMeta>
+              </option>
+              <option name="records">
+                <list>
+                  <SymbolRecordBean>
+                    <option name="name" value="get_db" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/mcp-chatbot/backend/app/db.py" />
+                    <option name="startLine" value="36" />
+                    <option name="endLine" value="43" />
+                    <option name="endCharacter" value="18" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="get_mongo" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/mcp-chatbot/backend/app/db.py" />
+                    <option name="startLine" value="55" />
+                    <option name="endLine" value="58" />
+                    <option name="endCharacter" value="19" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="init_sql_models" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/mcp-chatbot/backend/app/db.py" />
+                    <option name="startLine" value="61" />
+                    <option name="endLine" value="70" />
+                    <option name="endCharacter" value="41" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                </list>
+              </option>
+            </FileEntry>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mcp-chatbot/backend/app/langchain_agent.py">
+          <value>
+            <FileEntry>
+              <option name="meta">
+                <FileMeta>
+                  <option name="timeStamp" value="1772782845299" />
+                  <option name="hash" value="-292326250" />
+                </FileMeta>
+              </option>
+              <option name="records">
+                <list>
+                  <SymbolRecordBean>
+                    <option name="name" value="_heuristic_query" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/mcp-chatbot/backend/app/langchain_agent.py" />
+                    <option name="startLine" value="14" />
+                    <option name="endLine" value="37" />
+                    <option name="endCharacter" value="24" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="run_nl_query" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/mcp-chatbot/backend/app/langchain_agent.py" />
+                    <option name="startLine" value="40" />
+                    <option name="endLine" value="84" />
+                    <option name="endCharacter" value="5" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                </list>
+              </option>
+            </FileEntry>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mcp-chatbot/backend/app/main.py">
+          <value>
+            <FileEntry>
+              <option name="meta">
+                <FileMeta>
+                  <option name="timeStamp" value="1772782845301" />
+                  <option name="hash" value="160348348" />
+                </FileMeta>
+              </option>
+              <option name="records">
+                <list>
+                  <SymbolRecordBean>
+                    <option name="name" value="on_startup" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/mcp-chatbot/backend/app/main.py" />
+                    <option name="startLine" value="24" />
+                    <option name="endLine" value="26" />
+                    <option name="endCharacter" value="40" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="health" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/mcp-chatbot/backend/app/main.py" />
+                    <option name="startLine" value="30" />
+                    <option name="endLine" value="31" />
+                    <option name="endCharacter" value="53" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="login" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/mcp-chatbot/backend/app/main.py" />
+                    <option name="startLine" value="35" />
+                    <option name="endLine" value="39" />
+                    <option name="endCharacter" value="58" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="nl_query" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/mcp-chatbot/backend/app/main.py" />
+                    <option name="startLine" value="43" />
+                    <option name="endLine" value="46" />
+                    <option name="endCharacter" value="17" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                </list>
+              </option>
+            </FileEntry>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mcp-chatbot/backend/app/mcp_server.py">
+          <value>
+            <FileEntry>
+              <option name="meta">
+                <FileMeta>
+                  <option name="timeStamp" value="1772782845303" />
+                  <option name="hash" value="-1227978663" />
+                </FileMeta>
+              </option>
+              <option name="records">
+                <list>
+                  <SymbolRecordBean>
+                    <option name="name" value="_serialize_sql_order" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/mcp-chatbot/backend/app/mcp_server.py" />
+                    <option name="startLine" value="35" />
+                    <option name="endLine" value="42" />
+                    <option name="endCharacter" value="5" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="_serialize_mongo_doc" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/mcp-chatbot/backend/app/mcp_server.py" />
+                    <option name="startLine" value="45" />
+                    <option name="endLine" value="52" />
+                    <option name="endCharacter" value="5" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="list_orders" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/mcp-chatbot/backend/app/mcp_server.py" />
+                    <option name="startLine" value="56" />
+                    <option name="endLine" value="61" />
+                    <option name="endCharacter" value="68" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="get_order" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/mcp-chatbot/backend/app/mcp_server.py" />
+                    <option name="startLine" value="65" />
+                    <option name="endLine" value="76" />
+                    <option name="endCharacter" value="34" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="list_errors" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/mcp-chatbot/backend/app/mcp_server.py" />
+                    <option name="startLine" value="80" />
+                    <option name="endLine" value="89" />
+                    <option name="endCharacter" value="5" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="nl_query" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/mcp-chatbot/backend/app/mcp_server.py" />
+                    <option name="startLine" value="93" />
+                    <option name="endLine" value="94" />
+                    <option name="endCharacter" value="30" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                </list>
+              </option>
+            </FileEntry>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mcp-chatbot/backend/app/models.py">
+          <value>
+            <FileEntry>
+              <option name="meta">
+                <FileMeta>
+                  <option name="timeStamp" value="1772782845304" />
+                  <option name="hash" value="1067169106" />
+                </FileMeta>
+              </option>
+              <option name="records">
+                <list>
+                  <SymbolRecordBean>
+                    <option name="name" value="Base" />
+                    <option name="kind" value="CLASS" />
+                    <option name="filePath" value="$PROJECT_DIR$/mcp-chatbot/backend/app/models.py" />
+                    <option name="startLine" value="8" />
+                    <option name="endLine" value="9" />
+                    <option name="endCharacter" value="8" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="Order" />
+                    <option name="kind" value="CLASS" />
+                    <option name="filePath" value="$PROJECT_DIR$/mcp-chatbot/backend/app/models.py" />
+                    <option name="startLine" value="12" />
+                    <option name="endLine" value="19" />
+                    <option name="endCharacter" value="85" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                </list>
+              </option>
+            </FileEntry>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mcp-chatbot/backend/app/routes/orders.py">
+          <value>
+            <FileEntry>
+              <option name="meta">
+                <FileMeta>
+                  <option name="timeStamp" value="1772782845306" />
+                  <option name="hash" value="1033825344" />
+                </FileMeta>
+              </option>
+              <option name="records">
+                <list>
+                  <SymbolRecordBean>
+                    <option name="name" value="OrderOut" />
+                    <option name="kind" value="CLASS" />
+                    <option name="filePath" value="$PROJECT_DIR$/mcp-chatbot/backend/app/routes/orders.py" />
+                    <option name="startLine" value="15" />
+                    <option name="endLine" value="23" />
+                    <option name="endCharacter" value="30" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="Config" />
+                    <option name="kind" value="CLASS" />
+                    <option name="filePath" value="$PROJECT_DIR$/mcp-chatbot/backend/app/routes/orders.py" />
+                    <option name="startLine" value="22" />
+                    <option name="startCharacter" value="4" />
+                    <option name="endLine" value="23" />
+                    <option name="endCharacter" value="30" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="list_orders" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/mcp-chatbot/backend/app/routes/orders.py" />
+                    <option name="startLine" value="27" />
+                    <option name="endLine" value="43" />
+                    <option name="endCharacter" value="22" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="get_order" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/mcp-chatbot/backend/app/routes/orders.py" />
+                    <option name="startLine" value="47" />
+                    <option name="endLine" value="64" />
+                    <option name="endCharacter" value="9" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="list_errors" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/mcp-chatbot/backend/app/routes/orders.py" />
+                    <option name="startLine" value="68" />
+                    <option name="endLine" value="83" />
+                    <option name="endCharacter" value="22" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                </list>
+              </option>
+            </FileEntry>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mcp-chatbot/backend/app/seed.py">
+          <value>
+            <FileEntry>
+              <option name="meta">
+                <FileMeta>
+                  <option name="timeStamp" value="1772782845308" />
+                  <option name="hash" value="1319034221" />
+                </FileMeta>
+              </option>
+              <option name="records">
+                <list>
+                  <SymbolRecordBean>
+                    <option name="name" value="run" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/mcp-chatbot/backend/app/seed.py" />
+                    <option name="startLine" value="14" />
+                    <option name="endLine" value="32" />
+                    <option name="endCharacter" value="36" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                </list>
+              </option>
+            </FileEntry>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mcp-chatbot/frontend/package.json">
+          <value>
+            <FileEntry>
+              <option name="meta">
+                <FileMeta>
+                  <option name="timeStamp" value="1772782845317" />
+                  <option name="hash" value="-979871992" />
+                </FileMeta>
+              </option>
+            </FileEntry>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mcp-chatbot/frontend/postcss.config.js">
+          <value>
+            <FileEntry>
+              <option name="meta">
+                <FileMeta>
+                  <option name="timeStamp" value="1772782845318" />
+                  <option name="hash" value="-302008885" />
+                </FileMeta>
+              </option>
+            </FileEntry>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mcp-chatbot/frontend/src/styles.css">
+          <value>
+            <FileEntry>
+              <option name="meta">
+                <FileMeta>
+                  <option name="timeStamp" value="1772782845323" />
+                  <option name="hash" value="362569188" />
+                </FileMeta>
+              </option>
+            </FileEntry>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mcp-chatbot/frontend/tailwind.config.js">
+          <value>
+            <FileEntry>
+              <option name="meta">
+                <FileMeta>
+                  <option name="timeStamp" value="1772782845324" />
+                  <option name="hash" value="-1185527026" />
+                </FileMeta>
+              </option>
+            </FileEntry>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/mcp-chatbot/frontend/vite.config.js">
+          <value>
+            <FileEntry>
+              <option name="meta">
+                <FileMeta>
+                  <option name="timeStamp" value="1772782845325" />
+                  <option name="hash" value="827065365" />
+                </FileMeta>
+              </option>
+            </FileEntry>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/music-agent/search.py">
+          <value>
+            <FileEntry>
+              <option name="meta">
+                <FileMeta>
+                  <option name="timeStamp" value="1772785830549" />
+                  <option name="hash" value="1652400815" />
+                </FileMeta>
+              </option>
+              <option name="records">
+                <list>
+                  <SymbolRecordBean>
+                    <option name="name" value="SearchResult" />
+                    <option name="kind" value="CLASS" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/search.py" />
+                    <option name="startLine" value="12" />
+                    <option name="endLine" value="16" />
+                    <option name="endCharacter" value="19" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="_itunes_search" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/search.py" />
+                    <option name="startLine" value="19" />
+                    <option name="endLine" value="25" />
+                    <option name="endCharacter" value="34" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="_unique_non_empty" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/search.py" />
+                    <option name="startLine" value="28" />
+                    <option name="endLine" value="40" />
+                    <option name="endCharacter" value="14" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="search_song_preview" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/search.py" />
+                    <option name="startLine" value="43" />
+                    <option name="endLine" value="78" />
+                    <option name="endCharacter" value="60" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                </list>
+              </option>
+            </FileEntry>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/music-agent/vision.py">
+          <value>
+            <FileEntry>
+              <option name="meta">
+                <FileMeta>
+                  <option name="timeStamp" value="1772785855899" />
+                  <option name="hash" value="1257027072" />
+                </FileMeta>
+              </option>
+              <option name="records">
+                <list>
+                  <SymbolRecordBean>
+                    <option name="name" value="SongGuess" />
+                    <option name="kind" value="CLASS" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/vision.py" />
+                    <option name="startLine" value="15" />
+                    <option name="endLine" value="18" />
+                    <option name="endCharacter" value="24" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="_clean_fragment" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/vision.py" />
+                    <option name="startLine" value="21" />
+                    <option name="endLine" value="29" />
+                    <option name="endCharacter" value="16" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="_preprocess_image" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/vision.py" />
+                    <option name="startLine" value="32" />
+                    <option name="endLine" value="40" />
+                    <option name="endCharacter" value="17" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="extract_text_from_image" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/vision.py" />
+                    <option name="startLine" value="43" />
+                    <option name="endLine" value="49" />
+                    <option name="endCharacter" value="21" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="detect_song_and_artist" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/vision.py" />
+                    <option name="startLine" value="52" />
+                    <option name="endLine" value="90" />
+                    <option name="endCharacter" value="94" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                </list>
+              </option>
+            </FileEntry>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

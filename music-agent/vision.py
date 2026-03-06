@@ -18,6 +18,17 @@ class SongGuess:
     confidence_note: str
 
 
+def _clean_fragment(value: str) -> str:
+    value = value.strip().replace("’", "'")
+    value = re.sub(r"^[^A-Za-z0-9']+", "", value)
+    value = re.sub(r"[^A-Za-z0-9')]+$", "", value)
+    value = re.sub(r"\s+", " ", value).strip()
+    parts = value.split()
+    if len(parts) >= 2 and len(parts[0]) <= 2 and parts[0].islower() and parts[1][:1].isupper():
+        value = " ".join(parts[1:])
+    return value
+
+
 def _preprocess_image(image_path: Path):
     image = cv2.imread(str(image_path))
     if image is None:
@@ -49,18 +60,31 @@ def detect_song_and_artist(extracted_text: str) -> SongGuess:
     if not text:
         raise ValueError("No OCR text extracted from image.")
 
-    separators = [" - ", " • ", " by ", " — ", " – "]
-    for sep in separators:
-        if sep in text:
-            left, right = [part.strip() for part in text.split(sep, 1)]
-            if sep == " by ":
-                return SongGuess(artist=right, title=left, confidence_note=f"parsed using '{sep.strip()}'")
-            # heuristic: if left has many words and right is short, assume right is artist
-            if len(right.split()) <= 4:
-                return SongGuess(artist=right, title=left, confidence_note=f"parsed using '{sep.strip()}'")
-            return SongGuess(artist=left, title=right, confidence_note=f"parsed using '{sep.strip()}'")
+    normalized = re.sub(r"\s+", " ", text)
+    normalized = normalized.replace("â€¢", "•").replace("â€”", "—").replace("â€“", "–")
 
-    # fallback: first two chunks from OCR as title/artist unknown
-    chunks = re.split(r"[|,]", text)
-    title = chunks[0].strip()
+    # Prefer right-most compact spans to avoid matching noisy UI text.
+    dash_pattern = re.compile(r"([A-Za-z0-9'&., ]{2,40})\s*[-–—•]\s*([A-Za-z0-9'&., ]{2,60})")
+    by_pattern = re.compile(r"([A-Za-z0-9'&., ]{2,60})\s+by\s+([A-Za-z0-9'&., ]{2,40})", re.IGNORECASE)
+
+    dash_matches = list(dash_pattern.finditer(normalized))
+    if dash_matches:
+        last = dash_matches[-1]
+        left = _clean_fragment(last.group(1))
+        right = _clean_fragment(last.group(2))
+        if left and right:
+            return SongGuess(artist=left, title=right, confidence_note="parsed using right-most dash pattern")
+
+    by_matches = list(by_pattern.finditer(normalized))
+    if by_matches:
+        last = by_matches[-1]
+        left = _clean_fragment(last.group(1))
+        right = _clean_fragment(last.group(2))
+        if left and right:
+            return SongGuess(artist=right, title=left, confidence_note="parsed using right-most 'by' pattern")
+
+    chunks = re.split(r"[|,]", normalized)
+    title = _clean_fragment(chunks[0]) if chunks else "Unknown Song"
+    if not title:
+        title = "Unknown Song"
     return SongGuess(artist="Unknown Artist", title=title, confidence_note="fallback parsing")

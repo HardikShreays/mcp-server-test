@@ -41,6 +41,28 @@ Install Tesseract OCR:
   brew install tesseract
   ```
 
+### Windows setup (PowerShell)
+
+Install prerequisites:
+
+```powershell
+winget install -e --id Python.Python.3.12
+winget install -e --id UB-Mannheim.TesseractOCR
+```
+
+Then open a **new** PowerShell window and set up the project:
+
+```powershell
+cd C:\Users\ritshrey\IdeaProjects\mcp-server-test\music-agent
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+If `tesseract` is still not found after install, add its install directory to `PATH`
+(commonly `C:\Program Files\Tesseract-OCR`) and restart PowerShell.
+
 ### 2) Python env
 
 ```bash
