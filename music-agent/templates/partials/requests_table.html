@@ -1,0 +1,58 @@
+<section class="result-card">
+  <div class="result-head">
+    <div>
+      <p class="result-kicker">Requested Songs</p>
+      <h2 class="result-title">Admin Dashboard</h2>
+    </div>
+    <div class="actions">
+      <a class="btn secondary" href="{{ url_for('admin_page', role=role) }}">Refresh</a>
+    </div>
+  </div>
+
+  {% if requests_data %}
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            {% if visible_columns.request_id %}<th>Request ID</th>{% endif %}
+            {% if visible_columns.request_type %}<th>Request Type</th>{% endif %}
+            {% if visible_columns.song_title %}<th>Song Title</th>{% endif %}
+            {% if visible_columns.artist_name %}<th>Artist Name</th>{% endif %}
+            {% if visible_columns.extracted_text %}<th>Extracted Text</th>{% endif %}
+            {% if visible_columns.status %}<th>Status</th>{% endif %}
+            {% if visible_columns.created_time %}<th>Created Time</th>{% endif %}
+            {% if visible_columns.download %}<th>Download</th>{% endif %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in requests_data %}
+            <tr>
+              {% if visible_columns.request_id %}<td>{{ item.request_id }}</td>{% endif %}
+              {% if visible_columns.request_type %}<td>{{ item.request_type }}</td>{% endif %}
+              {% if visible_columns.song_title %}<td>{{ item.song_title or "-" }}</td>{% endif %}
+              {% if visible_columns.artist_name %}<td>{{ item.artist_name or "-" }}</td>{% endif %}
+              {% if visible_columns.extracted_text %}<td>{{ item.extracted_text or "-" }}</td>{% endif %}
+              {% if visible_columns.status %}<td><span class="status-pill">{{ item.status or "-" }}</span></td>{% endif %}
+              {% if visible_columns.created_time %}<td>{{ item.created_time or "-" }}</td>{% endif %}
+              {% if visible_columns.download %}
+                <td>
+                  {% if item.video_url or item.video_id or item.song_title or item.artist_name %}
+                    <form method="post" class="js-submit-form">
+                      <input type="hidden" name="form_type" value="download">
+                      <input type="hidden" name="request_id" value="{{ item.request_id }}">
+                      <button class="btn primary" type="submit">Download</button>
+                    </form>
+                  {% else %}
+                    <span class="muted-note">-</span>
+                  {% endif %}
+                </td>
+              {% endif %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="muted-note">No requests yet.</p>
+  {% endif %}
+</section>

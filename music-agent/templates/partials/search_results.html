@@ -1,0 +1,30 @@
+<section class="result-card">
+  <div class="result-head">
+    <div>
+      <p class="result-kicker">Top 5 Results for &ldquo;{{ search_query }}&rdquo;</p>
+      <h2 class="result-title">Select one to request</h2>
+    </div>
+  </div>
+
+  <ul class="search-results stack">
+    {% for item in search_results %}
+      <li class="search-result-item">
+        <div class="search-result-info">
+          <strong>{{ item.title }}</strong>
+          <span class="muted-note">{{ item.uploader }}{% if item.duration_display %} &middot; {{ item.duration_display }}{% endif %}</span>
+        </div>
+        <form method="post" class="js-submit-form" style="display: inline;">
+          <input type="hidden" name="form_type" value="request_select">
+          <input type="hidden" name="video_id" value="{{ item.video_id }}">
+          <input type="hidden" name="video_url" value="{{ item.url }}">
+          <input type="hidden" name="selected_title" value="{{ item.title }}">
+          <input type="hidden" name="selected_artist" value="{{ item.uploader }}">
+          {% if item.request_id %}
+            <input type="hidden" name="request_id" value="{{ item.request_id }}">
+          {% endif %}
+          <button class="btn primary" type="submit">Request</button>
+        </form>
+      </li>
+    {% endfor %}
+  </ul>
+</section>

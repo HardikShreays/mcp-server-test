@@ -435,6 +435,330 @@
             </FileEntry>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/music-agent/app.py">
+          <value>
+            <FileEntry>
+              <option name="meta">
+                <FileMeta>
+                  <option name="timeStamp" value="1774276182105" />
+                  <option name="hash" value="970572699" />
+                </FileMeta>
+              </option>
+              <option name="records">
+                <list>
+                  <SymbolRecordBean>
+                    <option name="name" value="_now_iso" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/app.py" />
+                    <option name="startLine" value="29" />
+                    <option name="endLine" value="30" />
+                    <option name="endCharacter" value="58" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="_is_allowed_image" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/app.py" />
+                    <option name="startLine" value="33" />
+                    <option name="endLine" value="34" />
+                    <option name="endCharacter" value="62" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="_build_search_query" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/app.py" />
+                    <option name="startLine" value="37" />
+                    <option name="endLine" value="39" />
+                    <option name="endCharacter" value="43" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="_safe_download_path" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/app.py" />
+                    <option name="startLine" value="42" />
+                    <option name="endLine" value="55" />
+                    <option name="endCharacter" value="24" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="_resolve_role" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/app.py" />
+                    <option name="startLine" value="58" />
+                    <option name="endLine" value="66" />
+                    <option name="endCharacter" value="20" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="_create_submission" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/app.py" />
+                    <option name="startLine" value="69" />
+                    <option name="endLine" value="93" />
+                    <option name="endCharacter" value="21" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="_update_submission" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/app.py" />
+                    <option name="startLine" value="96" />
+                    <option name="endLine" value="115" />
+                    <option name="endCharacter" value="17" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="_list_submissions" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/app.py" />
+                    <option name="startLine" value="118" />
+                    <option name="endLine" value="120" />
+                    <option name="endCharacter" value="45" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="_get_submission" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/app.py" />
+                    <option name="startLine" value="123" />
+                    <option name="endLine" value="128" />
+                    <option name="endCharacter" value="15" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="create_app" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/app.py" />
+                    <option name="startLine" value="131" />
+                    <option name="endLine" value="430" />
+                    <option name="endCharacter" value="14" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="index" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/app.py" />
+                    <option name="startLine" value="142" />
+                    <option name="startCharacter" value="4" />
+                    <option name="endLine" value="146" />
+                    <option name="endCharacter" value="61" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="user_page" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/app.py" />
+                    <option name="startLine" value="149" />
+                    <option name="startCharacter" value="4" />
+                    <option name="endLine" value="283" />
+                    <option name="endCharacter" value="9" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="admin_page" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/app.py" />
+                    <option name="startLine" value="286" />
+                    <option name="startCharacter" value="4" />
+                    <option name="endLine" value="368" />
+                    <option name="endCharacter" value="9" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="api_yt_search" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/app.py" />
+                    <option name="startLine" value="371" />
+                    <option name="startCharacter" value="4" />
+                    <option name="endLine" value="393" />
+                    <option name="endCharacter" value="10" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="api_yt_download" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/app.py" />
+                    <option name="startLine" value="396" />
+                    <option name="startCharacter" value="4" />
+                    <option name="endLine" value="417" />
+                    <option name="endCharacter" value="10" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="download_file" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/app.py" />
+                    <option name="startLine" value="420" />
+                    <option name="startCharacter" value="4" />
+                    <option name="endLine" value="428" />
+                    <option name="endCharacter" value="93" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                </list>
+              </option>
+            </FileEntry>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/music-agent/downloader.py">
+          <value>
+            <FileEntry>
+              <option name="meta">
+                <FileMeta>
+                  <option name="timeStamp" value="1774275599036" />
+                  <option name="hash" value="388794675" />
+                </FileMeta>
+              </option>
+              <option name="records">
+                <list>
+                  <SymbolRecordBean>
+                    <option name="name" value="resolve_ffmpeg_location" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/downloader.py" />
+                    <option name="startLine" value="17" />
+                    <option name="endLine" value="48" />
+                    <option name="endCharacter" value="15" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="resolve_js_runtimes" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/downloader.py" />
+                    <option name="startLine" value="51" />
+                    <option name="endLine" value="80" />
+                    <option name="endCharacter" value="23" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="build_runtime_opts" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/downloader.py" />
+                    <option name="startLine" value="83" />
+                    <option name="endLine" value="92" />
+                    <option name="endCharacter" value="15" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="target_mp3_path" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/downloader.py" />
+                    <option name="startLine" value="95" />
+                    <option name="endLine" value="98" />
+                    <option name="endCharacter" value="55" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="is_already_downloaded" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/downloader.py" />
+                    <option name="startLine" value="101" />
+                    <option name="endLine" value="102" />
+                    <option name="endCharacter" value="66" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="YouTubeSearchResult" />
+                    <option name="kind" value="CLASS" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/downloader.py" />
+                    <option name="startLine" value="106" />
+                    <option name="endLine" value="111" />
+                    <option name="endCharacter" value="24" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="_normalize_search_entry" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/downloader.py" />
+                    <option name="startLine" value="114" />
+                    <option name="endLine" value="123" />
+                    <option name="endCharacter" value="5" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="search_youtube_songs" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/downloader.py" />
+                    <option name="startLine" value="126" />
+                    <option name="endLine" value="154" />
+                    <option name="endCharacter" value="18" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="parse_artist_title_from_metadata" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/downloader.py" />
+                    <option name="startLine" value="157" />
+                    <option name="endLine" value="176" />
+                    <option name="endCharacter" value="24" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="yt_downloader" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/downloader.py" />
+                    <option name="startLine" value="179" />
+                    <option name="endLine" value="236" />
+                    <option name="endCharacter" value="22" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                </list>
+              </option>
+            </FileEntry>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/music-agent/main.py">
+          <value>
+            <FileEntry>
+              <option name="meta">
+                <FileMeta>
+                  <option name="timeStamp" value="1773950408825" />
+                  <option name="hash" value="-1727939259" />
+                </FileMeta>
+              </option>
+              <option name="records">
+                <list>
+                  <SymbolRecordBean>
+                    <option name="name" value="_build_query" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/main.py" />
+                    <option name="startLine" value="15" />
+                    <option name="endLine" value="17" />
+                    <option name="endCharacter" value="43" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="run" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/main.py" />
+                    <option name="startLine" value="20" />
+                    <option name="endLine" value="50" />
+                    <option name="endCharacter" value="16" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="build_parser" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/main.py" />
+                    <option name="startLine" value="53" />
+                    <option name="endLine" value="61" />
+                    <option name="endCharacter" value="17" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                  <SymbolRecordBean>
+                    <option name="name" value="main" />
+                    <option name="kind" value="FUNCTION" />
+                    <option name="filePath" value="$PROJECT_DIR$/music-agent/main.py" />
+                    <option name="startLine" value="64" />
+                    <option name="endLine" value="67" />
+                    <option name="endCharacter" value="24" />
+                    <option name="language" value="py" />
+                  </SymbolRecordBean>
+                </list>
+              </option>
+            </FileEntry>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/music-agent/search.py">
           <value>
             <FileEntry>

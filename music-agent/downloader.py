@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import logging
+import os
+import shutil
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -10,6 +12,84 @@ import yt_dlp
 from utils import ensure_directory, sanitize_filename
 
 logger = logging.getLogger(__name__)
+
+
+def resolve_ffmpeg_location() -> str | None:
+    """
+    Resolve ffmpeg binary location for yt-dlp.
+
+    Priority:
+    1) MUSIC_AGENT_FFMPEG_LOCATION env var (explicit override)
+    2) ffmpeg available on PATH
+    3) Common winget install location on Windows
+    """
+    explicit = os.getenv("MUSIC_AGENT_FFMPEG_LOCATION", "").strip()
+    if explicit:
+        explicit_path = Path(explicit)
+        if explicit_path.exists():
+            return str(explicit_path)
+
+    ffmpeg_on_path = shutil.which("ffmpeg")
+    if ffmpeg_on_path:
+        return ffmpeg_on_path
+
+    winget_root = Path.home() / "AppData" / "Local" / "Microsoft" / "WinGet" / "Packages"
+    winget_candidates = sorted(winget_root.glob("Gyan.FFmpeg_*"))
+    for candidate in winget_candidates:
+        bin_dir = candidate / "ffmpeg-8.1-full_build" / "bin"
+        ffmpeg_exe = bin_dir / "ffmpeg.exe"
+        if ffmpeg_exe.exists():
+            return str(bin_dir)
+
+        any_ffmpeg = list(candidate.glob("**/bin/ffmpeg.exe"))
+        if any_ffmpeg:
+            return str(any_ffmpeg[0].parent)
+
+    return None
+
+
+def resolve_js_runtimes() -> dict[str, dict[str, str | None]]:
+    """
+    Resolve JavaScript runtime config for yt-dlp EJS extraction.
+
+    Returns a dict in yt-dlp's expected format:
+    {"runtime_name": {"path": <optional path>}}
+    """
+    explicit = os.getenv("MUSIC_AGENT_JS_RUNTIME_PATH", "").strip()
+    if explicit:
+        explicit_path = Path(explicit)
+        if explicit_path.exists():
+            return {"deno": {"path": str(explicit_path)}}
+
+    deno_on_path = shutil.which("deno")
+    if deno_on_path:
+        return {"deno": {"path": deno_on_path}}
+
+    winget_root = Path.home() / "AppData" / "Local" / "Microsoft" / "WinGet" / "Packages"
+    deno_candidates = sorted(winget_root.glob("DenoLand.Deno_*"))
+    for candidate in deno_candidates:
+        deno_exe = candidate / "deno.exe"
+        if deno_exe.exists():
+            return {"deno": {"path": str(deno_exe)}}
+
+        nested = list(candidate.glob("**/deno.exe"))
+        if nested:
+            return {"deno": {"path": str(nested[0])}}
+
+    # Fallback to yt-dlp default; may warn if no runtime is available.
+    return {"deno": {}}
+
+
+def build_runtime_opts() -> dict[str, Any]:
+    opts: dict[str, Any] = {
+        "js_runtimes": resolve_js_runtimes(),
+    }
+
+    ffmpeg_location = resolve_ffmpeg_location()
+    if ffmpeg_location:
+        opts["ffmpeg_location"] = ffmpeg_location
+
+    return opts
 
 
 def target_mp3_path(base_dir: Path, artist: str, title: str) -> Path:
@@ -58,6 +138,7 @@ def search_youtube_songs(query: str, limit: int = 5) -> list[YouTubeSearchResult
         "skip_download": True,
         "noplaylist": True,
         "default_search": "ytsearch",
+        **build_runtime_opts(),
     }
 
     search_term = f"ytsearch{limit}:{query}"
@@ -107,6 +188,7 @@ def yt_downloader(video_url: str, base_dir: Path) -> Path:
         "quiet": True,
         "skip_download": True,
         "noplaylist": True,
+        **build_runtime_opts(),
     }
 
     with yt_dlp.YoutubeDL(probe_opts) as ydl:
@@ -126,6 +208,7 @@ def yt_downloader(video_url: str, base_dir: Path) -> Path:
         "outtmpl": str(target_path.with_suffix(".%(ext)s")),
         "noplaylist": True,
         "quiet": False,
+        **build_runtime_opts(),
         "postprocessors": [
             {
                 "key": "FFmpegExtractAudio",
@@ -134,6 +217,8 @@ def yt_downloader(video_url: str, base_dir: Path) -> Path:
             }
         ],
     }
+    if "ffmpeg_location" not in ydl_opts:
+        logger.warning("ffmpeg not found. Audio conversion quality may be limited.")
 
     logger.info("Starting download for URL %s -> %s", video_url, target_path)
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
