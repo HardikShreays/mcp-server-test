@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Music Agent</title>
+  {% include "partials/styles.html" %}
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <article class="masthead">
+        <div class="eyebrow">Request . Match . Download</div>
+        <h1>Music Agent</h1>
+        <p class="lead">
+          Type the song you want, or upload a screenshot with track text. Search YouTube and submit your request.
+        </p>
+        <div class="hero-grid">
+          <div class="hero-stat">
+            <strong>Search</strong>
+            Enter song title and artist to find on YouTube.
+          </div>
+          <div class="hero-stat">
+            <strong>Screenshot</strong>
+            OCR a screenshot when you only have visual text.
+          </div>
+          <div class="hero-stat">
+            <strong>Output</strong>
+            Track requests are visible to admins for processing.
+          </div>
+        </div>
+      </article>
+
+      <aside class="masthead visual" aria-hidden="true">
+        <div class="record"></div>
+      </aside>
+    </section>
+
+    {% if submission_message %}
+      <div class="alert success">
+        {{ submission_message }}{% if submission_request_id %} (Request ID: {{ submission_request_id }}){% endif %}
+      </div>
+    {% endif %}
+
+    {% if error %}
+      <div class="alert">{{ error }}</div>
+    {% endif %}
+
+    <section class="form-grid">
+      {% include "partials/request_by_text_form.html" %}
+      {% include "partials/request_by_screenshot_form.html" %}
+    </section>
+
+    {% if search_results %}
+      {% include "partials/search_results.html" %}
+    {% endif %}
+  </main>
+  <script>
+    document.querySelectorAll(".js-submit-form").forEach((form) => {
+      form.addEventListener("submit", () => {
+        const button = form.querySelector('button[type="submit"]');
+        if (button) {
+          button.disabled = true;
+        }
+      });
+    });
+  </script>
+</body>
+</html>

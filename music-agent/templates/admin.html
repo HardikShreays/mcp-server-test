@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Music Agent Admin</title>
+  {% include "partials/styles.html" %}
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <article class="masthead">
+        <div class="eyebrow">Admin . Monitor . Status</div>
+        <h1>Admin Dashboard</h1>
+        <p class="lead">
+          Review user-submitted song requests and download tracks from approved request rows.
+        </p>
+        <div class="hero-grid">
+          <div class="hero-stat">
+            <strong>Requests</strong>
+            Live list of text and screenshot submissions.
+          </div>
+          <div class="hero-stat">
+            <strong>Tracking</strong>
+            Status and timestamps are shown when present.
+          </div>
+          <div class="hero-stat">
+            <strong>Read-Only</strong>
+            No upload or request submission controls.
+          </div>
+        </div>
+      </article>
+
+      <aside class="masthead visual" aria-hidden="true">
+        <div class="record"></div>
+      </aside>
+    </section>
+
+    {% if error %}
+      <div class="alert">{{ error }}</div>
+    {% endif %}
+
+    {% if result %}
+      {% include "partials/download_result.html" %}
+    {% endif %}
+
+    {% include "partials/requests_table.html" %}
+  </main>
+  <script>
+    document.querySelectorAll(".js-submit-form").forEach((form) => {
+      form.addEventListener("submit", () => {
+        const button = form.querySelector('button[type="submit"]');
+        if (button) {
+          button.disabled = true;
+        }
+      });
+    });
+    setTimeout(() => window.location.reload(), 15000);
+  </script>
+</body>
+</html>

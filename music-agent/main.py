@@ -5,12 +5,16 @@ import logging
 from pathlib import Path
 
 from config import Settings
-from downloader import download_preview_as_mp3, is_already_downloaded, target_mp3_path
-from search import search_song_preview
+from downloader import search_youtube_songs, yt_downloader
 from utils import retry, setup_logging
 from vision import detect_song_and_artist, extract_text_from_image
 
 logger = logging.getLogger(__name__)
+
+
+def _build_query(title: str, artist: str) -> str:
+    parts = [s.strip() for s in (title, artist) if s and s.strip()]
+    return " ".join(parts) if parts else ""
 
 
 def run(image_path: Path) -> Path:
@@ -21,32 +25,36 @@ def run(image_path: Path) -> Path:
         raise FileNotFoundError(f"Screenshot not found: {image_path}")
 
     extract = retry(settings.max_retries, settings.retry_backoff_seconds)(extract_text_from_image)
-    search = retry(settings.max_retries, settings.retry_backoff_seconds)(search_song_preview)
-    download = retry(settings.max_retries, settings.retry_backoff_seconds)(download_preview_as_mp3)
+    search = retry(settings.max_retries, settings.retry_backoff_seconds)(search_youtube_songs)
+    download = retry(settings.max_retries, settings.retry_backoff_seconds)(yt_downloader)
 
     extracted_text = extract(image_path, settings.tesseract_psm)
     guess = detect_song_and_artist(extracted_text)
 
     logger.info("Detected Song:\nArtist: %s\nSong: %s", guess.artist, guess.title)
 
-    result = search(guess.title, guess.artist, settings.user_agent)
-    out_path = target_mp3_path(settings.base_download_dir, result.artist, result.title)
+    query = _build_query(guess.title, guess.artist)
+    if not query:
+        raise ValueError("Could not detect song or artist from the image.")
 
-    if is_already_downloaded(out_path):
-        logger.info("Download status: skipped (already downloaded) -> %s", out_path)
-        return out_path
+    results = search(query, limit=5)
+    if not results:
+        raise LookupError(f"No YouTube results for: {query}")
 
-    logger.info("Downloading...")
-    saved = download(result.preview_url, out_path)
-    logger.info("Saved to:\n%s", saved)
+    # Use first result for non-interactive CLI
+    first = results[0]
+    logger.info("Downloading: %s - %s", first.uploader, first.title)
+
+    saved = download(first.url, settings.base_download_dir)
+    logger.info("Saved to: %s", saved)
     return saved
 
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
-            "Extract song metadata from a screenshot and download a legal preview audio file "
-            "to downloads/music/<artist>/<song>.mp3"
+            "Extract song metadata from a screenshot, search YouTube, and download "
+            "the top result to downloads/music/<artist>/<song>.mp3"
         )
     )
     parser.add_argument("image_path", type=Path, help="Path to screenshot image")

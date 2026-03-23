@@ -1,0 +1,19 @@
+<article class="input-card">
+  <h2 class="card-title">Request By Text</h2>
+  <p class="card-copy">Use this when you already know the track name or artist. Title is preferred, artist is optional.</p>
+  <form method="post" class="stack js-submit-form">
+    <input type="hidden" name="form_type" value="request">
+    <label>
+      Song Title
+      <input type="text" name="song_title" placeholder="Blinding Lights" {% if active_form == "request" %}value="{{ request.form.get('song_title', '') }}"{% endif %}>
+    </label>
+    <label>
+      Artist Name
+      <input type="text" name="artist_name" placeholder="The Weeknd" {% if active_form == "request" %}value="{{ request.form.get('artist_name', '') }}"{% endif %}>
+    </label>
+    <p class="muted-note">Search YouTube and submit a song request.</p>
+    <div class="btn-row">
+      <button class="btn primary" type="submit">Find and Request</button>
+    </div>
+  </form>
+</article>

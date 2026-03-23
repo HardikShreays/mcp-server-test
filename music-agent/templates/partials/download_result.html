@@ -1,0 +1,22 @@
+<section class="result-card">
+  <div class="result-head">
+    <div>
+      <p class="result-kicker">Download Complete</p>
+      <h2 class="result-title">Saved to disk</h2>
+    </div>
+    <div class="status-pill">{{ result.status }}</div>
+  </div>
+
+  <div class="meta-grid">
+    <div class="meta">
+      <strong>Saved Path</strong>
+      <span>{{ result.saved_path }}</span>
+    </div>
+  </div>
+
+  <div class="actions">
+    {% if result.download_href %}
+      <a class="btn primary" href="{{ result.download_href }}">Download File</a>
+    {% endif %}
+  </div>
+</section>
