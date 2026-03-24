@@ -1,17 +1,23 @@
 <section class="result-card">
   <div class="result-head">
     <div>
-      <p class="result-kicker">Top 5 Results for &ldquo;{{ search_query }}&rdquo;</p>
-      <h2 class="result-title">Select one to request</h2>
+      <p class="result-kicker">Top 5 Matches For &ldquo;{{ search_query }}&rdquo;</p>
+      <h2 class="result-title">Send The Right One</h2>
     </div>
   </div>
+  <p class="muted-note">Preview the strongest YouTube matches, then push the exact track you want into the DJ request queue.</p>
 
   <ul class="search-results stack">
     {% for item in search_results %}
       <li class="search-result-item">
         <div class="search-result-info">
           <strong>{{ item.title }}</strong>
-          <span class="muted-note">{{ item.uploader }}{% if item.duration_display %} &middot; {{ item.duration_display }}{% endif %}</span>
+          <div class="search-result-meta">
+            <span class="inline-pill">{{ item.uploader }}</span>
+            {% if item.duration_display %}
+              <span class="inline-pill">{{ item.duration_display }}</span>
+            {% endif %}
+          </div>
         </div>
         <form method="post" class="js-submit-form" style="display: inline;">
           <input type="hidden" name="form_type" value="request_select">
@@ -23,7 +29,7 @@
           {% if item.request_id %}
             <input type="hidden" name="request_id" value="{{ item.request_id }}">
           {% endif %}
-          <button class="btn primary" type="submit">Request</button>
+          <button class="btn primary" type="submit">Request This Track</button>
         </form>
       </li>
     {% endfor %}

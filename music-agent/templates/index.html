@@ -3,438 +3,58 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Music Agent</title>
-  <style>
-    :root {
-      --paper: #f4efe3;
-      --paper-deep: #e6d8bc;
-      --ink: #14110f;
-      --muted: #65594d;
-      --panel: rgba(255, 250, 240, 0.9);
-      --panel-strong: #fffaf0;
-      --line: rgba(20, 17, 15, 0.12);
-      --gold: #b7791f;
-      --gold-deep: #8a5b14;
-      --teal: #155e63;
-      --teal-soft: #d9f1ef;
-      --red: #a61b1b;
-      --shadow: 0 20px 60px rgba(20, 17, 15, 0.18);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: Georgia, "Times New Roman", serif;
-      color: var(--ink);
-      background:
-        radial-gradient(circle at top left, rgba(255, 243, 199, 0.95), transparent 28%),
-        radial-gradient(circle at right 10% top 18%, rgba(21, 94, 99, 0.18), transparent 22%),
-        linear-gradient(135deg, #f8f3e8 0%, #eadfc8 48%, #d4c1a1 100%);
-      padding: 28px;
-    }
-
-    .shell {
-      width: min(1180px, 100%);
-      margin: 0 auto;
-      display: grid;
-      gap: 24px;
-      animation: enter 420ms ease-out;
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: 1.2fr 0.9fr;
-      gap: 24px;
-      align-items: stretch;
-    }
-
-    .masthead,
-    .result-card,
-    .input-card {
-      background: var(--panel);
-      backdrop-filter: blur(10px);
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      box-shadow: var(--shadow);
-    }
-
-    .masthead {
-      padding: 30px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.76rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gold-deep);
-      margin-bottom: 16px;
-    }
-
-    .eyebrow::before {
-      content: "";
-      width: 40px;
-      height: 1px;
-      background: currentColor;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(2.6rem, 7vw, 5.8rem);
-      line-height: 0.95;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-    }
-
-    .lead {
-      max-width: 32rem;
-      margin: 18px 0 0;
-      font-size: 1.08rem;
-      line-height: 1.6;
-      color: var(--muted);
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 28px;
-    }
-
-    .hero-stat {
-      padding: 16px;
-      border-radius: 18px;
-      background: rgba(255, 255, 255, 0.55);
-      border: 1px solid rgba(20, 17, 15, 0.08);
-    }
-
-    .hero-stat strong {
-      display: block;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 6px;
-    }
-
-    .visual {
-      min-height: 100%;
-      padding: 24px;
-      display: grid;
-      place-items: center;
-      background:
-        linear-gradient(160deg, rgba(21, 94, 99, 0.08), rgba(183, 121, 31, 0.18)),
-        var(--panel-strong);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .record {
-      width: min(320px, 70vw);
-      aspect-ratio: 1;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle at center, #121212 0 12%, #d8b15d 12.2% 15%, #111 15.2% 28%, #262626 28.2% 35%, #111 35.2% 44%, #262626 44.2% 53%, #111 53.2% 62%, #262626 62.2% 71%, #111 71.2% 100%);
-      box-shadow: 0 30px 60px rgba(20, 17, 15, 0.28);
-      position: relative;
-      animation: spin 18s linear infinite;
-    }
-
-    .record::after {
-      content: "";
-      position: absolute;
-      inset: 44%;
-      border-radius: 50%;
-      background: #f6e5c1;
-      border: 6px solid #111;
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 24px;
-    }
-
-    .input-card {
-      padding: 24px;
-    }
-
-    .card-title {
-      margin: 0 0 8px;
-      font-size: 1.5rem;
-    }
-
-    .card-copy {
-      margin: 0 0 20px;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
-    .stack {
-      display: grid;
-      gap: 14px;
-    }
-
-    label {
-      display: grid;
-      gap: 8px;
-      font-size: 0.94rem;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-    }
-
-    input[type="text"],
-    input[type="file"] {
-      width: 100%;
-      border: 1px solid rgba(20, 17, 15, 0.16);
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.88);
-      color: var(--ink);
-      padding: 14px 16px;
-      font: inherit;
-    }
-
-    input[type="text"]:focus,
-    input[type="file"]:focus {
-      outline: 3px solid rgba(21, 94, 99, 0.18);
-      border-color: var(--teal);
-    }
-
-    .muted-note {
-      font-size: 0.92rem;
-      color: var(--muted);
-      margin: 0;
-      line-height: 1.5;
-    }
-
-    .btn-row {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 4px;
-    }
-
-    .btn {
-      border: 0;
-      border-radius: 999px;
-      padding: 13px 20px;
-      font: inherit;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-      cursor: pointer;
-      transition: transform 140ms ease, box-shadow 140ms ease, background 140ms ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-1px);
-    }
-
-    .btn.primary {
-      color: #fff9ef;
-      background: linear-gradient(120deg, var(--teal), #0f766e);
-      box-shadow: 0 12px 26px rgba(21, 94, 99, 0.25);
-    }
-
-    .btn.secondary {
-      color: var(--ink);
-      background: linear-gradient(120deg, #f2ddb0, #e9c979);
-      box-shadow: 0 12px 26px rgba(183, 121, 31, 0.18);
-    }
-
-    .alert {
-      padding: 15px 18px;
-      border-radius: 18px;
-      border: 1px solid rgba(166, 27, 27, 0.18);
-      background: rgba(255, 235, 235, 0.9);
-      color: var(--red);
-      font-weight: 700;
-    }
-
-    .result-card {
-      padding: 24px;
-      display: grid;
-      gap: 18px;
-    }
-
-    .result-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: start;
-      gap: 16px;
-    }
-
-    .result-kicker {
-      margin: 0 0 8px;
-      font-size: 0.8rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--gold-deep);
-    }
-
-    .result-title {
-      margin: 0;
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      line-height: 1;
-    }
-
-    .status-pill {
-      white-space: nowrap;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: var(--teal-soft);
-      color: var(--teal);
-      font-weight: 700;
-    }
-
-    .meta-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .meta {
-      padding: 16px;
-      border-radius: 18px;
-      background: rgba(255, 255, 255, 0.7);
-      border: 1px solid rgba(20, 17, 15, 0.08);
-    }
-
-    .meta strong {
-      display: block;
-      font-size: 0.78rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 6px;
-    }
-
-    .meta span,
-    .meta a {
-      font-size: 1rem;
-      color: var(--ink);
-      word-break: break-word;
-    }
-
-    .actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .search-results {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .search-result-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      padding: 14px 18px;
-      border-radius: 18px;
-      background: rgba(255, 255, 255, 0.7);
-      border: 1px solid rgba(20, 17, 15, 0.08);
-      margin-bottom: 10px;
-    }
-
-    .search-result-info {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .search-result-info strong {
-      font-size: 1.05rem;
-    }
-
-    .search-result-info .muted-note {
-      margin: 0;
-      font-size: 0.9rem;
-    }
-
-    a {
-      color: var(--teal);
-      text-decoration-thickness: 2px;
-      text-underline-offset: 2px;
-    }
-
-    @keyframes enter {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes spin {
-      from {
-        transform: rotate(0deg);
-      }
-
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    @media (max-width: 920px) {
-      .hero,
-      .form-grid,
-      .meta-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .result-head {
-        flex-direction: column;
-      }
-    }
-  </style>
+  <title>CueMeInDJ</title>
+  {% include "partials/styles.html" %}
 </head>
-<body>
+<body class="landing-page">
   <main class="shell">
+    <section class="page-topbar">
+      <div class="page-brand">
+        <strong>CueMeInDJ</strong>
+        <span>Event-ready music request flow for audiences and DJs, styled like a live performance surface.</span>
+      </div>
+    </section>
+
     <section class="hero">
       <article class="masthead">
         <div class="eyebrow">Request . Match . Download</div>
-        <h1>Music Agent</h1>
+        <h1>CueMeInDJ</h1>
         <p class="lead">
-          Type the song you want, or upload a screenshot with track text. Search YouTube, pick from the top 5 results,
-          and download as MP3 to <code>downloads/music/Artist/Song.mp3</code>.
+          This is the live request pipeline in one place: audience submissions, smart search matching, and DJ-ready downloads into <code>downloads/music/Artist/Song.mp3</code>.
         </p>
         <div class="hero-grid">
           <div class="hero-stat">
-            <strong>Search</strong>
-            Enter song title and artist to find on YouTube.
+            <strong>Audience Input</strong>
+            Type a request or upload a screenshot to start the same search pipeline already wired into the app.
           </div>
           <div class="hero-stat">
-            <strong>Screenshot</strong>
-            OCR a screenshot when you only have visual text.
+            <strong>Search Match</strong>
+            Review the top YouTube candidates, choose the correct result, and keep the queue clean.
           </div>
           <div class="hero-stat">
-            <strong>Output</strong>
-            Full MP3 saved in Artist/Song folders.
+            <strong>DJ Delivery</strong>
+            Final downloads land in the correct folder structure so the booth can pull them straight into the set.
           </div>
+        </div>
+        <div class="wave-line" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
       </article>
 
       <aside class="masthead visual" aria-hidden="true">
-        <div class="record"></div>
+        <div class="turntable">
+          <div class="turntable-platter">
+            <div class="turntable-record">
+              <div class="turntable-label"></div>
+            </div>
+          </div>
+          <div class="turntable-arm">
+            <div class="turntable-arm-head"></div>
+          </div>
+          <div class="turntable-base-light"></div>
+        </div>
       </aside>
     </section>
 
@@ -445,7 +65,7 @@
     <section class="form-grid">
       <article class="input-card">
         <h2 class="card-title">Request By Text</h2>
-        <p class="card-copy">Use this when you already know the track name or artist. Title is preferred, artist is optional.</p>
+        <p class="card-copy">Type the title, add the artist if you know it, and send the app to search for the best downloadable match.</p>
         <form method="post" class="stack">
           <input type="hidden" name="form_type" value="request">
           <label>
@@ -465,14 +85,14 @@
 
       <article class="input-card">
         <h2 class="card-title">Request By Screenshot</h2>
-        <p class="card-copy">Use this when the track info is inside a screenshot from a playlist, reel, or player UI.</p>
+        <p class="card-copy">Upload a screenshot from a playlist, story, or music app when the track information is easier to capture visually.</p>
         <form method="post" enctype="multipart/form-data" class="stack">
           <input type="hidden" name="form_type" value="upload">
           <label>
             Screenshot
             <input type="file" name="screenshot" accept=".png,.jpg,.jpeg,.bmp,.webp" required>
           </label>
-          <p class="muted-note">Supported formats: `png`, `jpg`, `jpeg`, `bmp`, `webp`.</p>
+          <p class="muted-note">Supported formats: <code>png</code>, <code>jpg</code>, <code>jpeg</code>, <code>bmp</code>, <code>webp</code>.</p>
           <div class="btn-row">
             <button class="btn secondary" type="submit">Upload and Scan</button>
           </div>
@@ -494,7 +114,12 @@
             <li class="search-result-item">
               <div class="search-result-info">
                 <strong>{{ item.title }}</strong>
-                <span class="muted-note">{{ item.uploader }}{% if item.duration_display %} &middot; {{ item.duration_display }}{% endif %}</span>
+                <div class="search-result-meta">
+                  <span class="inline-pill">{{ item.uploader }}</span>
+                  {% if item.duration_display %}
+                    <span class="inline-pill">{{ item.duration_display }}</span>
+                  {% endif %}
+                </div>
               </div>
               <form method="post" style="display: inline;">
                 <input type="hidden" name="form_type" value="download">
@@ -513,7 +138,7 @@
         <div class="result-head">
           <div>
             <p class="result-kicker">Download Complete</p>
-            <h2 class="result-title">Saved to disk</h2>
+            <h2 class="result-title">Track Saved To Queue</h2>
           </div>
           <div class="status-pill">{{ result.status }}</div>
         </div>

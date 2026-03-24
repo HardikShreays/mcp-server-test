@@ -3,36 +3,51 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Music Agent Login</title>
+  <title>CueMeInDJ Login</title>
   {% include "partials/styles.html" %}
 </head>
-<body>
+<body class="login-page">
   <main class="shell">
     <section class="hero">
       <article class="masthead">
-        <div class="eyebrow">Secure . Role . Access</div>
-        <h1>Music Agent Login</h1>
+        <div class="eyebrow">Secure Entry . Crowd Side . DJ Side</div>
+        <h1>CueMeInDJ Login</h1>
         <p class="lead">
-          Sign in as User or Admin to continue.
+          Step into the live request flow. Audience members send tracks to the floor, DJs review demand and pull songs straight into the queue.
         </p>
         <div class="hero-grid">
           <div class="hero-stat">
-            <strong>User</strong>
-            Submit text/screenshot song requests.
+            <strong>Audience Access</strong>
+            Send song ideas by typing the track name or uploading a screenshot from a reel, playlist, or story.
           </div>
           <div class="hero-stat">
-            <strong>Admin</strong>
-            Review requested songs and download.
+            <strong>DJ Access</strong>
+            Review incoming requests, spot the right match fast, and download tracks into the active music folder.
           </div>
           <div class="hero-stat">
-            <strong>Access</strong>
-            Session-based authentication.
+            <strong>Session Flow</strong>
+            Keep the event moving with the same role-based authentication and request pipeline already wired into the app.
           </div>
+        </div>
+        <div class="wave-line" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
       </article>
 
-      <aside class="masthead visual" aria-hidden="true">
-        <div class="record"></div>
+      <aside class="masthead visual login-visual" aria-hidden="true">
+        <div class="turntable">
+          <div class="turntable-platter">
+            <div class="turntable-record">
+              <div class="turntable-label"></div>
+            </div>
+          </div>
+          <div class="turntable-arm">
+            <div class="turntable-arm-head"></div>
+          </div>
+          <div class="turntable-base-light"></div>
+        </div>
       </aside>
     </section>
 
@@ -45,8 +60,8 @@
 
     <section class="form-grid">
       <article class="input-card">
-        <h2 class="card-title">Login</h2>
-        <p class="card-copy">Choose role, then enter username and password.</p>
+        <h2 class="card-title">Enter The Booth</h2>
+        <p class="card-copy">Pick your role, authenticate, and continue into the live request queue.</p>
         <form method="post" class="stack js-submit-form">
           <label>
             Login as
@@ -71,8 +86,8 @@
       </article>
 
       <article class="input-card">
-        <h2 class="card-title">Create Account</h2>
-        <p class="card-copy">Create a new User or Admin account.</p>
+        <h2 class="card-title">Create Access</h2>
+        <p class="card-copy">Set up a new audience or admin account without changing the existing authentication flow.</p>
         <form method="post" class="stack js-submit-form">
           <label>
             Create as
