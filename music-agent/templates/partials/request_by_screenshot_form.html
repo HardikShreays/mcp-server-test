@@ -1,22 +1,24 @@
 <article class="input-card">
   <h2 class="card-title">Request By Screenshot</h2>
-  <p class="card-copy">Use this when the track info is inside a screenshot from a playlist, reel, or player UI.</p>
+  <p class="card-copy">Found the song on-screen instead of in your head? Upload the screenshot, let the app read the text, and route the request to the right DJ.</p>
   <form method="post" enctype="multipart/form-data" class="stack js-submit-form">
     <input type="hidden" name="form_type" value="upload">
-    <label>
-      Screenshot
-      <input type="file" name="screenshot" accept=".png,.jpg,.jpeg,.bmp,.webp" required>
-    </label>
-    <label>
-      Admin
-      <select name="assigned_admin_id" required>
-        <option value="">Select Admin</option>
-        {% for admin in admins %}
-          <option value="{{ admin.id }}" {% if request.form.get("assigned_admin_id") == (admin.id|string) %}selected{% endif %}>{{ admin.username }}</option>
-        {% endfor %}
-      </select>
-    </label>
-    <p class="muted-note">Supported formats: `png`, `jpg`, `jpeg`, `bmp`, `webp`.</p>
+    <div class="field-grid">
+      <label>
+        Screenshot
+        <input type="file" name="screenshot" accept=".png,.jpg,.jpeg,.bmp,.webp" required>
+      </label>
+      <label>
+        Admin
+        <select name="assigned_admin_id" required>
+          <option value="">Select Admin</option>
+          {% for admin in admins %}
+            <option value="{{ admin.id }}" {% if request.form.get("assigned_admin_id") == (admin.id|string) %}selected{% endif %}>{{ admin.username }}</option>
+          {% endfor %}
+        </select>
+      </label>
+    </div>
+    <p class="muted-note">Supported formats stay the same: <code>png</code>, <code>jpg</code>, <code>jpeg</code>, <code>bmp</code>, <code>webp</code>.</p>
     <div class="btn-row">
       <button class="btn secondary" type="submit">Upload and Scan</button>
     </div>

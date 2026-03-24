@@ -3,48 +3,88 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Music Agent Admin</title>
+  <title>CueMeInDJ Admin</title>
   {% include "partials/styles.html" %}
 </head>
-<body>
+<body class="admin-page">
   <main class="shell">
+    <section class="page-topbar">
+      <div class="page-brand">
+        <strong>CueMeInDJ Control Deck</strong>
+        <span>Admin command surface for reviewing audience demand and pulling tracks into the event queue.</span>
+      </div>
+      <div class="actions">
+        <a class="btn secondary" href="{{ url_for('logout') }}">Logout</a>
+      </div>
+    </section>
+
     <section class="hero">
       <article class="masthead">
-        <div class="eyebrow">Admin . Monitor . Status</div>
+        <div class="eyebrow">DJ Desk . Queue Control . Download</div>
         <h1>Admin Dashboard</h1>
         <p class="lead">
-          Review user-submitted song requests and download tracks from approved request rows.
+          Scan incoming audience requests, monitor status, and save matched tracks directly into the DJ folder without changing the existing download workflow.
         </p>
         <div class="hero-grid">
           <div class="hero-stat">
-            <strong>Requests</strong>
-            Live list of text and screenshot submissions.
+            <strong>Incoming Demand</strong>
+            Watch the live request list from both typed requests and screenshot-driven submissions.
           </div>
           <div class="hero-stat">
-            <strong>Tracking</strong>
-            Status and timestamps are shown when present.
+            <strong>Download Ready</strong>
+            Launch the same per-request download action and save tracks to the selected event folder.
           </div>
           <div class="hero-stat">
-            <strong>Read-Only</strong>
-            No upload or request submission controls.
+            <strong>Operational View</strong>
+            Keep status, timestamps, and request context visible so the queue can be managed with confidence.
           </div>
+        </div>
+        <div class="wave-line" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
       </article>
 
       <aside class="masthead visual" aria-hidden="true">
-        <div class="record"></div>
+        <div class="dashboard-visual">
+          <div class="equalizer">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="visual-caption">
+            <strong>Booth Operations</strong>
+            <p>This view is tuned like a control desk: high scanability, clear status cues, and direct access to queue-ready downloads.</p>
+          </div>
+        </div>
       </aside>
     </section>
 
-    <div class="actions">
-      <a class="btn secondary" href="{{ url_for('logout') }}">Logout</a>
-    </div>
+    <section class="status-strip">
+      <article class="mini-panel">
+        <strong>Folder Routing</strong>
+        <span>Choose the destination once and keep future admin downloads aimed at the active set folder.</span>
+      </article>
+      <article class="mini-panel">
+        <strong>Fast Review</strong>
+        <span>Statuses, request type, timestamps, and title data stay easy to scan even when the room gets busy.</span>
+      </article>
+      <article class="mini-panel">
+        <strong>Queue Momentum</strong>
+        <span>Download selected tracks quickly and keep the event moving without altering any backend logic.</span>
+      </article>
+    </section>
 
     <section class="result-card">
       <div class="result-head">
         <div>
           <p class="result-kicker">Direct Folder Save</p>
-          <h2 class="result-title">Download Location</h2>
+          <h2 class="result-title">DJ Queue Folder</h2>
         </div>
       </div>
       <p class="muted-note" id="folder-support-note">Checking browser support...</p>
@@ -189,7 +229,7 @@
       if (!headerValue) {
         return null;
       }
-      const utf = headerValue.match(/filename\\*=UTF-8''([^;]+)/i);
+      const utf = headerValue.match(/filename\*=UTF-8''([^;]+)/i);
       if (utf && utf[1]) {
         return decodeURIComponent(utf[1]);
       }

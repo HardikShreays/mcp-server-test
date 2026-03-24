@@ -1,8 +1,8 @@
 <section class="result-card">
   <div class="result-head">
     <div>
-      <p class="result-kicker">Requested Songs</p>
-      <h2 class="result-title">Admin Dashboard</h2>
+      <p class="result-kicker">Incoming Audience Queue</p>
+      <h2 class="result-title">Request Control</h2>
     </div>
     <div class="actions">
       <a class="btn secondary" href="{{ url_for('admin_page') }}">Refresh</a>
@@ -40,7 +40,7 @@
                     <form method="post" class="js-submit-form js-admin-download-form" data-request-id="{{ item.request_id }}">
                       <input type="hidden" name="form_type" value="download">
                       <input type="hidden" name="request_id" value="{{ item.request_id }}">
-                      <button class="btn primary js-admin-download-btn" type="submit">Download</button>
+                      <button class="btn primary js-admin-download-btn" type="submit">Download Track</button>
                     </form>
                   {% else %}
                     <span class="muted-note">-</span>
@@ -53,6 +53,6 @@
       </table>
     </div>
   {% else %}
-    <p class="muted-note">No requests yet.</p>
+    <p class="muted-note requests-empty">No requests have landed yet. Once the audience starts sending songs, they will appear here for DJ review and download.</p>
   {% endif %}
 </section>
