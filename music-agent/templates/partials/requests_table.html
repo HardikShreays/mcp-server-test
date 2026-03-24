@@ -5,7 +5,7 @@
       <h2 class="result-title">Admin Dashboard</h2>
     </div>
     <div class="actions">
-      <a class="btn secondary" href="{{ url_for('admin_page', role=role) }}">Refresh</a>
+      <a class="btn secondary" href="{{ url_for('admin_page') }}">Refresh</a>
     </div>
   </div>
 
@@ -37,10 +37,10 @@
               {% if visible_columns.download %}
                 <td>
                   {% if item.video_url or item.video_id or item.song_title or item.artist_name %}
-                    <form method="post" class="js-submit-form">
+                    <form method="post" class="js-submit-form js-admin-download-form" data-request-id="{{ item.request_id }}">
                       <input type="hidden" name="form_type" value="download">
                       <input type="hidden" name="request_id" value="{{ item.request_id }}">
-                      <button class="btn primary" type="submit">Download</button>
+                      <button class="btn primary js-admin-download-btn" type="submit">Download</button>
                     </form>
                   {% else %}
                     <span class="muted-note">-</span>

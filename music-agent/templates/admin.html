@@ -36,6 +36,26 @@
       </aside>
     </section>
 
+    <div class="actions">
+      <a class="btn secondary" href="{{ url_for('logout') }}">Logout</a>
+    </div>
+
+    <section class="result-card">
+      <div class="result-head">
+        <div>
+          <p class="result-kicker">Direct Folder Save</p>
+          <h2 class="result-title">Download Location</h2>
+        </div>
+      </div>
+      <p class="muted-note" id="folder-support-note">Checking browser support...</p>
+      <div class="actions">
+        <button class="btn secondary" id="set-download-folder-btn" type="button">Set Download Folder</button>
+        <button class="btn secondary" id="clear-download-folder-btn" type="button">Clear Folder</button>
+      </div>
+      <p class="muted-note" id="selected-folder-status">No folder selected.</p>
+      <div id="direct-save-message" style="display:none;"></div>
+    </section>
+
     {% if error %}
       <div class="alert">{{ error }}</div>
     {% endif %}
@@ -47,14 +67,315 @@
     {% include "partials/requests_table.html" %}
   </main>
   <script>
+    const setFolderBtn = document.getElementById("set-download-folder-btn");
+    const clearFolderBtn = document.getElementById("clear-download-folder-btn");
+    const folderStatus = document.getElementById("selected-folder-status");
+    const supportNote = document.getElementById("folder-support-note");
+    const messageBox = document.getElementById("direct-save-message");
+    const supportsFolderSave = "showDirectoryPicker" in window && "indexedDB" in window;
+
+    const dbName = "music-agent-folder-db";
+    const storeName = "handles";
+    const keyName = "download-dir";
+    let directoryHandle = null;
+
+    const showMessage = (text, type = "alert") => {
+      messageBox.className = type === "success" ? "alert success" : "alert";
+      messageBox.textContent = text;
+      messageBox.style.display = "block";
+    };
+
+    const clearMessage = () => {
+      messageBox.style.display = "none";
+      messageBox.textContent = "";
+      messageBox.className = "";
+    };
+
+    const openFolderDb = () => new Promise((resolve, reject) => {
+      const req = indexedDB.open(dbName, 1);
+      req.onupgradeneeded = () => {
+        const db = req.result;
+        if (!db.objectStoreNames.contains(storeName)) {
+          db.createObjectStore(storeName);
+        }
+      };
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+
+    const idbSetHandle = async (handle) => {
+      const db = await openFolderDb();
+      await new Promise((resolve, reject) => {
+        const tx = db.transaction(storeName, "readwrite");
+        tx.objectStore(storeName).put(handle, keyName);
+        tx.oncomplete = resolve;
+        tx.onerror = () => reject(tx.error);
+      });
+      db.close();
+    };
+
+    const idbGetHandle = async () => {
+      const db = await openFolderDb();
+      const result = await new Promise((resolve, reject) => {
+        const tx = db.transaction(storeName, "readonly");
+        const req = tx.objectStore(storeName).get(keyName);
+        req.onsuccess = () => resolve(req.result || null);
+        req.onerror = () => reject(req.error);
+      });
+      db.close();
+      return result;
+    };
+
+    const idbClearHandle = async () => {
+      const db = await openFolderDb();
+      await new Promise((resolve, reject) => {
+        const tx = db.transaction(storeName, "readwrite");
+        tx.objectStore(storeName).delete(keyName);
+        tx.oncomplete = resolve;
+        tx.onerror = () => reject(tx.error);
+      });
+      db.close();
+    };
+
+    const ensureReadWritePermission = async (handle) => {
+      if (!handle || typeof handle.queryPermission !== "function") {
+        return false;
+      }
+      let state = await handle.queryPermission({ mode: "readwrite" });
+      if (state === "granted") {
+        return true;
+      }
+      if (typeof handle.requestPermission === "function") {
+        state = await handle.requestPermission({ mode: "readwrite" });
+        return state === "granted";
+      }
+      return false;
+    };
+
+    const setFolderStatus = (text) => {
+      folderStatus.textContent = text;
+    };
+
+    const restoreFolderHandle = async () => {
+      if (!supportsFolderSave) {
+        supportNote.textContent = "Direct folder save is not supported in this browser. Using normal download.";
+        setFolderBtn.disabled = true;
+        clearFolderBtn.disabled = true;
+        setFolderStatus("No folder selected.");
+        return;
+      }
+
+      supportNote.textContent = "Direct folder save supported. Select a folder once and future downloads will go there.";
+      try {
+        const saved = await idbGetHandle();
+        if (!saved) {
+          setFolderStatus("No folder selected.");
+          return;
+        }
+        const granted = await ensureReadWritePermission(saved);
+        if (!granted) {
+          await idbClearHandle();
+          setFolderStatus("No folder selected.");
+          return;
+        }
+        directoryHandle = saved;
+        setFolderStatus(`Folder selected: ${directoryHandle.name}`);
+      } catch {
+        setFolderStatus("No folder selected.");
+      }
+    };
+
+    const filenameFromContentDisposition = (headerValue) => {
+      if (!headerValue) {
+        return null;
+      }
+      const utf = headerValue.match(/filename\\*=UTF-8''([^;]+)/i);
+      if (utf && utf[1]) {
+        return decodeURIComponent(utf[1]);
+      }
+      const plain = headerValue.match(/filename=\"?([^\";]+)\"?/i);
+      return plain && plain[1] ? plain[1] : null;
+    };
+
+    const filenameFromUrl = (urlValue) => {
+      try {
+        const url = new URL(urlValue, window.location.origin);
+        const name = url.pathname.split("/").pop();
+        return name ? decodeURIComponent(name) : "download.mp3";
+      } catch {
+        return "download.mp3";
+      }
+    };
+
+    const splitNameExt = (filename) => {
+      const idx = filename.lastIndexOf(".");
+      if (idx <= 0) {
+        return { base: filename, ext: "" };
+      }
+      return { base: filename.slice(0, idx), ext: filename.slice(idx) };
+    };
+
+    const createUniqueFileHandle = async (dirHandle, preferredName) => {
+      try {
+        return await dirHandle.getFileHandle(preferredName, { create: false });
+      } catch {
+        return null;
+      }
+    };
+
+    const getWritableHandle = async (dirHandle, filename) => {
+      const { base, ext } = splitNameExt(filename);
+      let candidate = filename;
+      let counter = 1;
+
+      while (await createUniqueFileHandle(dirHandle, candidate)) {
+        candidate = `${base} (${counter})${ext}`;
+        counter += 1;
+      }
+      return dirHandle.getFileHandle(candidate, { create: true });
+    };
+
+    const parseDownloadHref = (htmlText) => {
+      const doc = new DOMParser().parseFromString(htmlText, "text/html");
+      const link = Array.from(doc.querySelectorAll("a[href]"))
+        .find((a) => a.getAttribute("href")?.includes("/downloads/"));
+      if (!link) {
+        return null;
+      }
+      return new URL(link.getAttribute("href"), window.location.origin).toString();
+    };
+
+    const triggerBrowserDownload = (downloadHref) => {
+      const a = document.createElement("a");
+      a.href = downloadHref;
+      a.rel = "noopener";
+      a.style.display = "none";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    };
+
+    const requestDownloadHref = async (form) => {
+      const response = await fetch(form.action || window.location.pathname, {
+        method: "POST",
+        body: new FormData(form),
+        credentials: "same-origin",
+      });
+      const html = await response.text();
+      return parseDownloadHref(html);
+    };
+
+    const saveDownloadToFolder = async (downloadHref) => {
+      const response = await fetch(downloadHref, { credentials: "same-origin" });
+      if (!response.ok) {
+        throw new Error("Download fetch failed.");
+      }
+      const blob = await response.blob();
+      const headerName = filenameFromContentDisposition(response.headers.get("content-disposition"));
+      const fallbackName = filenameFromUrl(downloadHref);
+      const filename = headerName || fallbackName;
+
+      const handle = await getWritableHandle(directoryHandle, filename);
+      const writable = await handle.createWritable();
+      await writable.write(blob);
+      await writable.close();
+      return handle.name || filename;
+    };
+
+    setFolderBtn.addEventListener("click", async () => {
+      clearMessage();
+      if (!supportsFolderSave) {
+        showMessage("Direct folder save is not supported in this browser. Using normal download.");
+        return;
+      }
+      try {
+        const handle = await window.showDirectoryPicker({ mode: "readwrite" });
+        const granted = await ensureReadWritePermission(handle);
+        if (!granted) {
+          showMessage("Folder permission was not granted. Falling back to normal downloads.");
+          return;
+        }
+        directoryHandle = handle;
+        await idbSetHandle(handle);
+        setFolderStatus(`Folder selected: ${handle.name}`);
+        showMessage("Download folder saved.", "success");
+      } catch {
+        showMessage("Folder selection canceled. Using normal download.");
+      }
+    });
+
+    clearFolderBtn.addEventListener("click", async () => {
+      clearMessage();
+      directoryHandle = null;
+      if (supportsFolderSave) {
+        try {
+          await idbClearHandle();
+        } catch {
+          // no-op
+        }
+      }
+      setFolderStatus("No folder selected.");
+      showMessage("Saved folder cleared.", "success");
+    });
+
     document.querySelectorAll(".js-submit-form").forEach((form) => {
       form.addEventListener("submit", () => {
+        if (form.classList.contains("js-admin-download-form")) {
+          return;
+        }
         const button = form.querySelector('button[type="submit"]');
         if (button) {
           button.disabled = true;
         }
       });
     });
+
+    document.querySelectorAll(".js-admin-download-form").forEach((form) => {
+      form.addEventListener("submit", async (event) => {
+        clearMessage();
+        event.preventDefault();
+        const button = form.querySelector(".js-admin-download-btn");
+        if (button) {
+          button.disabled = true;
+        }
+
+        try {
+          const downloadHref = await requestDownloadHref(form);
+          if (!downloadHref) {
+            throw new Error("Could not resolve download link.");
+          }
+
+          if (supportsFolderSave && directoryHandle) {
+            const permitted = await ensureReadWritePermission(directoryHandle);
+            if (permitted) {
+              const filename = await saveDownloadToFolder(downloadHref);
+              showMessage(`Saved to selected folder: ${filename}`, "success");
+              setTimeout(() => window.location.reload(), 900);
+            } else {
+              triggerBrowserDownload(downloadHref);
+              showMessage("Folder permission was revoked. Used normal browser download instead.");
+              setTimeout(() => window.location.reload(), 900);
+            }
+          } else {
+            triggerBrowserDownload(downloadHref);
+            if (!supportsFolderSave) {
+              showMessage("Direct folder save not supported here. Used normal browser download.");
+            } else {
+              showMessage("No folder selected. Used normal browser download.");
+            }
+            setTimeout(() => window.location.reload(), 900);
+          }
+        } catch {
+          showMessage("Download processing failed. Please try again.");
+        } finally {
+          if (button) {
+            button.disabled = false;
+          }
+        }
+      });
+    });
+
+    restoreFolderHandle();
     setTimeout(() => window.location.reload(), 15000);
   </script>
 </body>

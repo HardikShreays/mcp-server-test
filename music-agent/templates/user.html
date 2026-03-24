@@ -36,6 +36,10 @@
       </aside>
     </section>
 
+    <div class="actions">
+      <a class="btn secondary" href="{{ url_for('logout') }}">Logout</a>
+    </div>
+
     {% if submission_message %}
       <div class="alert success">
         {{ submission_message }}{% if submission_request_id %} (Request ID: {{ submission_request_id }}){% endif %}

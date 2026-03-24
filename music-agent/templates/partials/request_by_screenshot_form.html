@@ -7,6 +7,15 @@
       Screenshot
       <input type="file" name="screenshot" accept=".png,.jpg,.jpeg,.bmp,.webp" required>
     </label>
+    <label>
+      Admin
+      <select name="assigned_admin_id" required>
+        <option value="">Select Admin</option>
+        {% for admin in admins %}
+          <option value="{{ admin.id }}" {% if request.form.get("assigned_admin_id") == (admin.id|string) %}selected{% endif %}>{{ admin.username }}</option>
+        {% endfor %}
+      </select>
+    </label>
     <p class="muted-note">Supported formats: `png`, `jpg`, `jpeg`, `bmp`, `webp`.</p>
     <div class="btn-row">
       <button class="btn secondary" type="submit">Upload and Scan</button>

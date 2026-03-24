@@ -11,6 +11,15 @@
       Artist Name
       <input type="text" name="artist_name" placeholder="The Weeknd" {% if active_form == "request" %}value="{{ request.form.get('artist_name', '') }}"{% endif %}>
     </label>
+    <label>
+      Admin
+      <select name="assigned_admin_id" required>
+        <option value="">Select Admin</option>
+        {% for admin in admins %}
+          <option value="{{ admin.id }}" {% if request.form.get("assigned_admin_id") == (admin.id|string) %}selected{% endif %}>{{ admin.username }}</option>
+        {% endfor %}
+      </select>
+    </label>
     <p class="muted-note">Search YouTube and submit a song request.</p>
     <div class="btn-row">
       <button class="btn primary" type="submit">Find and Request</button>

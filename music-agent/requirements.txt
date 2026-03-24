@@ -1,4 +1,7 @@
 Flask
+SQLAlchemy
+alembic
+psycopg2-binary
 opencv-python
 pytesseract
 requests

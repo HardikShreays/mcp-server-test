@@ -19,6 +19,7 @@
           <input type="hidden" name="video_url" value="{{ item.url }}">
           <input type="hidden" name="selected_title" value="{{ item.title }}">
           <input type="hidden" name="selected_artist" value="{{ item.uploader }}">
+          <input type="hidden" name="assigned_admin_id" value="{{ item.assigned_admin_id }}">
           {% if item.request_id %}
             <input type="hidden" name="request_id" value="{{ item.request_id }}">
           {% endif %}

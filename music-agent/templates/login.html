@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Music Agent Login</title>
+  {% include "partials/styles.html" %}
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <article class="masthead">
+        <div class="eyebrow">Secure . Role . Access</div>
+        <h1>Music Agent Login</h1>
+        <p class="lead">
+          Sign in as User or Admin to continue.
+        </p>
+        <div class="hero-grid">
+          <div class="hero-stat">
+            <strong>User</strong>
+            Submit text/screenshot song requests.
+          </div>
+          <div class="hero-stat">
+            <strong>Admin</strong>
+            Review requested songs and download.
+          </div>
+          <div class="hero-stat">
+            <strong>Access</strong>
+            Session-based authentication.
+          </div>
+        </div>
+      </article>
+
+      <aside class="masthead visual" aria-hidden="true">
+        <div class="record"></div>
+      </aside>
+    </section>
+
+    {% if error %}
+      <div class="alert">{{ error }}</div>
+    {% endif %}
+    {% if success %}
+      <div class="alert success">{{ success }}</div>
+    {% endif %}
+
+    <section class="form-grid">
+      <article class="input-card">
+        <h2 class="card-title">Login</h2>
+        <p class="card-copy">Choose role, then enter username and password.</p>
+        <form method="post" class="stack js-submit-form">
+          <label>
+            Login as
+            <select name="role" required>
+              <option value="requestor" {% if selected_role == "requestor" %}selected{% endif %}>Login as User</option>
+              <option value="admin" {% if selected_role == "admin" %}selected{% endif %}>Login as Admin</option>
+            </select>
+          </label>
+          <label>
+            Username
+            <input type="text" name="username" required autocomplete="username">
+          </label>
+          <label>
+            Password
+            <input type="password" name="password" required autocomplete="current-password">
+          </label>
+          <input type="hidden" name="action" value="login">
+          <div class="btn-row">
+            <button class="btn primary" type="submit">Login</button>
+          </div>
+        </form>
+      </article>
+
+      <article class="input-card">
+        <h2 class="card-title">Create Account</h2>
+        <p class="card-copy">Create a new User or Admin account.</p>
+        <form method="post" class="stack js-submit-form">
+          <label>
+            Create as
+            <select name="signup_role" required>
+              <option value="requestor" {% if signup_role == "requestor" %}selected{% endif %}>Create User</option>
+              <option value="admin" {% if signup_role == "admin" %}selected{% endif %}>Create Admin</option>
+            </select>
+          </label>
+          <label>
+            Username
+            <input type="text" name="signup_username" required autocomplete="username">
+          </label>
+          <label>
+            Password
+            <input type="password" name="signup_password" required autocomplete="new-password">
+          </label>
+          <label>
+            Confirm Password
+            <input type="password" name="confirm_password" required autocomplete="new-password">
+          </label>
+          <input type="hidden" name="action" value="signup">
+          <div class="btn-row">
+            <button class="btn secondary" type="submit">Create Account</button>
+          </div>
+        </form>
+      </article>
+    </section>
+  </main>
+  <script>
+    document.querySelectorAll(".js-submit-form").forEach((form) => {
+      form.addEventListener("submit", () => {
+        const button = form.querySelector('button[type="submit"]');
+        if (button) {
+          button.disabled = true;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
