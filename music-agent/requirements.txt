@@ -2,7 +2,7 @@ Flask
 SQLAlchemy
 alembic
 psycopg2-binary
-opencv-python
+opencv-python-headless
 pytesseract
 requests
 yt-dlp
